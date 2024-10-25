@@ -37,7 +37,7 @@ export class InventoryEntriesComponent {
       stock: ['', [Validators.required, Validators.min(1)]],
       price: ['', [Validators.required, Validators.min(1)]],
       operationType: ['add', Validators.required],
-      description: [''],
+      description: ['', Validators.required],
       name: ['',Validators.required, Validators],
       expiration_date: [new Date(), Validators.required]
     });
@@ -77,13 +77,11 @@ export class InventoryEntriesComponent {
   }
 
   fillForm(product: any): void {
-    this.updateForm.patchValue({
-      id: product.id,
-      stock: product.stock,
-      description: product.description,
-      date: product.expiration_date,
-      price: product.price,
-      name: product.name
-    });
+    this.updateForm.get('date')?.setValue(new Date(product.expiration_date));
+    this.updateForm.get('id')?.setValue(product.id);
+    this.updateForm.get('stock')?.setValue(product.stock);
+    this.updateForm.get('description')?.setValue(product.description);
+    this.updateForm.get('price')?.setValue(product.price);
+    this.updateForm.get('name')?.setValue(product.name);
   }
 }

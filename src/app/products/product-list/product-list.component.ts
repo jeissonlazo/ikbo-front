@@ -24,7 +24,7 @@ export class ProductListComponent {
   products: any[] = [];
   filteredProducts: Product[] = [];
   filterForm: FormGroup;
-  isDateFilterEnabled: boolean = true;
+  isDateFilterEnabled: boolean = false;
   constructor(
     private productService: ProductService,
     private fb: FormBuilder
@@ -40,38 +40,20 @@ export class ProductListComponent {
   ngOnInit() {
     this.productService.getProducts().subscribe(data => {
       this.products = data;
+      this.filteredProducts= [...this.products];
     });
   }
 
   toggleDateFilter() {
-    console.log('Date filter toggled', this.isDateFilterEnabled);
     if(this.isDateFilterEnabled) {
-      this.filteredProducts = this.products.filter(product => new Date(product.expiration_date) <= new Date());
+      const today = new Date();
+      const validProducts = this.products.filter(product => {
+        const expirationDate = new Date(product.expiration_date);
+        return expirationDate >= today;
+      });
+      this.filteredProducts = validProducts;
     }else{
       this.filteredProducts = this.products;
     }
-  }
-
-  applyFilters() {
-    let filtered = [...this.products];
-    const searchTerm = this.filterForm.get('searchTerm')?.value.toLowerCase();
-    const expirationDate = this.filterForm.get('expiration_date')?.value;
-
-    // Apply search filter
-    if (searchTerm) {
-      filtered = filtered.filter(product =>
-        product.name.toLowerCase().includes(searchTerm) ||
-        product.description?.toLowerCase().includes(searchTerm)
-      );
-    }
-
-    // Apply date filter if enabled
-    if (this.isDateFilterEnabled && expirationDate) {
-      filtered = filtered.filter(product =>
-        new Date(product.expiration_date) <= new Date(expirationDate)
-      );
-    }
-
-    this.filteredProducts = filtered;
   }
 }
