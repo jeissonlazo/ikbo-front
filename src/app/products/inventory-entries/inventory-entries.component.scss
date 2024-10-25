@@ -1,0 +1,65 @@
+/* inventory-update.component.scss */
+.inventory-update-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.update-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px 0;
+}
+
+.operation-type-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+
+  .operation-toggles {
+    width: 100%;
+    
+    .mat-button-toggle {
+      flex: 1;
+      
+      .mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 16px;
+
+  button {
+    min-width: 120px;
+
+    .mat-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 599px) {
+  .inventory-update-container {
+    padding: 16px;
+  }
+
+  .operation-toggles {
+    flex-direction: column;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    
+    button {
+      width: 100%;
+    }
+  }
+}

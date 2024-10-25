@@ -1,0 +1,107 @@
+<!-- inventory-update.component.html -->
+<div class="inventory-update-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Update Inventory</mat-card-title>
+      <mat-card-subtitle>Manage stock entries and exits</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="updateForm" (ngSubmit)="updateInventory()" class="update-form">
+        <!-- Product ID -->
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Product Name" >
+          @if(updateForm.get('name')?.hasError('pattern')){
+            <mat-error>
+              Product ID must be a number
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Product ID</mat-label>
+          <input matInput formControlName="id" placeholder="Enter product ID">
+          @if(updateForm.get('id')?.hasError('pattern')){
+            <mat-error>
+              Product ID must be a number
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Quantity Change -->
+        <mat-form-field appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <input matInput type="number" formControlName="stock" 
+                 placeholder="Enter quantity" min="1">
+          <mat-icon matSuffix>inventory_2</mat-icon>
+
+          @if (updateForm.get('stock')?.hasError('required')) {
+            <mat-error>
+              Quantity is required
+            </mat-error>
+          }
+
+          @if(updateForm.get('stock')?.hasError('min')){
+            <mat-error>
+              Quantity must be greater than 0
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>price</mat-label>
+          <input matInput type="number" formControlName="price" 
+                 placeholder="Enter quantity" min="1">
+          <mat-icon matSuffix>inventory_2</mat-icon>
+
+          @if (updateForm.get('price')?.hasError('required')) {
+            <mat-error>
+              Quantity is required
+            </mat-error>
+          }
+
+          @if(updateForm.get('price')?.hasError('min')){
+            <mat-error>
+              Quantity must be greater than 0
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+        <!-- Date -->
+        <mat-form-field appearance="outline">
+          <mat-label>Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="expiration_date">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- Notes -->
+        <mat-form-field appearance="outline">
+          <mat-label>description</mat-label>
+          <textarea matInput formControlName="description" 
+                    placeholder="Add any additional description" rows="3">
+          </textarea>
+        </mat-form-field>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button mat-stroked-button type="button" 
+                  (click)="resetForm()" 
+                  [disabled]="isLoading">
+            Clear
+          </button>
+          <button mat-raised-button color="primary" 
+                  type="submit"
+                  [disabled]="updateForm.valid">
+            <mat-icon>save</mat-icon>
+            update
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

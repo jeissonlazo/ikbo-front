@@ -1,0 +1,18 @@
+<form (submit)="searchProduct()">
+  <label>Buscar Producto:</label>
+  <input [(ngModel)]="query" required>
+  <button type="submit">Buscar</button>
+</form>
+
+@if(results.length){
+  <div >
+    <h3>Resultados:</h3>
+    <ul>
+      @for (product of results; track product.name) {
+        <li>
+          {{ product.name }} - {{ product.quantity }} unidades (Vencimiento: {{ product.expirationDate }})
+        </li>
+      }
+    </ul>
+  </div>
+}

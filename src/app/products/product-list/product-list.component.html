@@ -1,0 +1,25 @@
+<div class="products">
+
+
+  @for (product of products; track product.name) {
+
+    <mat-card class="example-card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>{{product.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="example-card-content">
+        <div><strong>Description :</strong> {{product.description}}</div>
+        <div><strong>Expiration date :</strong> {{product.expiration_date | date: 'dd/MM/yyyy'}} </div>
+        <div><strong>Stock :</strong>{{ product.stock }}</div>
+        <div><strong>Price :</strong>{{ product.price | currency}}</div>
+      </mat-card-content>
+      <mat-card-footer class="example-card-footer">
+        <div class="actions">
+          <a [routerLink]="'/entradas-salidas/'+product.id " routerLinkActive="router-link-active"  mat-raised-button>Update</a>
+          <a [routerLink]="'/entradas-salidas/'+product.id " routerLinkActive="router-link-active"  mat-raised-button>remove</a>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+
+  }
+</div>
