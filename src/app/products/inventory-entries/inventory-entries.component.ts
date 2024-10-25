@@ -38,7 +38,7 @@ export class InventoryEntriesComponent {
       price: ['', [Validators.required, Validators.min(1)]],
       operationType: ['add', Validators.required],
       description: ['', Validators.required],
-      name: ['',Validators.required, Validators],
+      name: ['',Validators.required],
       expiration_date: [new Date(), Validators.required]
     });
   }
@@ -83,5 +83,7 @@ export class InventoryEntriesComponent {
     this.updateForm.get('description')?.setValue(product.description);
     this.updateForm.get('price')?.setValue(product.price);
     this.updateForm.get('name')?.setValue(product.name);
+
+    this.updateForm.get('id')?.disable();
   }
 }
