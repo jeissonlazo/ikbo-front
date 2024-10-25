@@ -1,5 +1,40 @@
-<div class="products">
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="filterForm" class="filters">
+      <mat-form-field appearance="outline">
+        <mat-label>Search products</mat-label>
+        <input
+          matInput
+          formControlName="searchTerm"
+          placeholder="Type to search..."
+        >
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>Expiration before</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="expiration_date"
+        >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+    </form>
+    <mat-slide-toggle
+    [(ngModel)]="isDateFilterEnabled"
+        style="height: 50px;"
+        [checked]="isDateFilterEnabled"
+        (change)="toggleDateFilter()"
+        color="primary"
+      >
+        Expiration Date 
+      </mat-slide-toggle>
+  </mat-card-content>
+</mat-card>
+<div class="products">
 
   @for (product of products; track product.name) {
 
