@@ -1,5 +1,5 @@
 
-    <div [formGroup]="filterForm" class="filters">
+    <div class="filters">
       <mat-form-field appearance="outline">
         <mat-label>Search products by name</mat-label>
         <input
@@ -22,7 +22,7 @@
       </mat-form-field> -->
 
       <mat-slide-toggle
-      [(ngModel)]="isDateFilterEnabled"
+          [(ngModel)]="isDateFilterEnabled"
           style="height: 50px;"
           [checked]="isDateFilterEnabled"
           (change)="toggleDateFilter()"
