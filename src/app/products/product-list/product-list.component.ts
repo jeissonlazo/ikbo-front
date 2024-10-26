@@ -56,4 +56,9 @@ export class ProductListComponent {
       this.filteredProducts = this.products;
     }
   }
+
+  filterName(e:any){
+    const searchTerm = e.target.value;
+    this.filteredProducts = this.products.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  }
 }

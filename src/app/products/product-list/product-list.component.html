@@ -1,11 +1,11 @@
 
-    <form [formGroup]="filterForm" class="filters">
+    <div [formGroup]="filterForm" class="filters">
       <mat-form-field appearance="outline">
-        <mat-label>Search products</mat-label>
+        <mat-label>Search products by name</mat-label>
         <input
           matInput
-          formControlName="searchTerm"
-          placeholder="Type to search..."
+          (change)="filterName($event)"
+          placeholder="Press enter to search"
         >
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
@@ -21,16 +21,16 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field> -->
 
-    </form>
-    <mat-slide-toggle
-    [(ngModel)]="isDateFilterEnabled"
-        style="height: 50px;"
-        [checked]="isDateFilterEnabled"
-        (change)="toggleDateFilter()"
-        color="primary"
-      >
-      filter expired products 
-      </mat-slide-toggle>
+      <mat-slide-toggle
+      [(ngModel)]="isDateFilterEnabled"
+          style="height: 50px;"
+          [checked]="isDateFilterEnabled"
+          (change)="toggleDateFilter()"
+          color="primary"
+        >
+        filter expired products 
+        </mat-slide-toggle>
+    </div>
 <div class="products">
 
   @for (product of filteredProducts; track product.name) {
